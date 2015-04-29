@@ -55,3 +55,20 @@ docs/_build/
 
 # PyBuilder
 target/
+*.pyc
+
+# temporary files
+*~
+
+# database files
+*.sqlite
+migrations/
+
+# virtualenv environments
+venv*/
+
+# build artifacts from python setup.py build or python setup.py install
+*egg*/
+
+#special developers folders and files
+.c9/
