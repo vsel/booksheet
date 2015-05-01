@@ -1,0 +1,18 @@
+{% extends "proto.html" %}
+
+{% block title %}BookSheet! - Bookmarks{% endblock %}
+
+{% block page_content %}
+<div class="jumbotron" style="margin:0px; background-color:#7D9C9F">
+    <h1>{{name}}</h1>
+</div>
+{% for bookmark in bookmarks %}
+<div class="jumbotron" style="margin:0px; background-color:#BDD8DA">
+	<h2>"{{bookmark.bookname}}"   Page: {{bookmark.page}}</h2>
+	<hr>
+	<p>{{bookmark.text}}<p>
+	<hr>
+	<div class="comment-date">{{ moment(bookmark.timestamp).fromNow() }}</div>   
+</div>
+{% endfor %}
+{% endblock %}
