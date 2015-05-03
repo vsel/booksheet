@@ -4,7 +4,11 @@
 
 {% block page_content %}
 <div class="jumbotron" style="margin:0px; background-color:#7D9C9F">
+    {% if current_user.is_authenticated() %}
     <h1>{{name}}</h1>
+    {% else %}
+    <h1>Привет Дарагой Анон!</h1>
+    {% endif %}
 </div>
 {% for bookmark in bookmarks %}
 <div class="jumbotron" style="margin:0px; background-color:#BDD8DA">
@@ -13,6 +17,14 @@
 	<p>{{bookmark.text}}<p>
 	<hr>
 	<div class="comment-date">{{ moment(bookmark.timestamp).fromNow() }}</div>   
+	{% if current_user.id == bookmark.userid %}
+        <a href="{{ url_for('.edit_bookmark', id=bookmark.id) }}">
+        <span class="label label-primary">Edit</span>
+        </a>
+        <a href="{{ url_for('.bookmark_delete', id=bookmark.id) }}">
+        <span class="label label-danger">Delete</span>
+        </a>
+    {% endif %}
 </div>
 {% endfor %}
 {% endblock %}

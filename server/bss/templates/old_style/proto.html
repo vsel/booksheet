@@ -18,10 +18,10 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="{{ url_for('auth.login') }}"> <span class="glyphicon glyphicon-log-in"></span> Log In</a>
+							<a href="{{ url_for('auth.login') }}">Sign UP</a>
 						</li>
 						<li>
-							<a href="{{ url_for('auth.register') }}"> <span class="glyphicon"></span>Sign IN</a>
+							<a href="{{ url_for('auth.register') }}">Sign IN</a>
 						</li>
 						<li class="dropdown">
 							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <strong class="caret"></strong></a>
@@ -55,33 +55,32 @@
 	</div>
 </div>
 {% endblock %}
-{% block content %}
 <div id="content">
-	<div class="container">
-	    {% for message in get_flashed_messages() %}
-		    <div class="alert alert-warning">
-		        <button type="button" class="close" data-dismiss="alert">&times;</button>
-		        {{ message }}
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+<div id="page_content">{% block page_content%}{% endblock %}</div>
+    <div id="footer">
+        {% block footer %}
+        <div id="footer" style="margin-top:5px; background-color:#DFEFF0">
+		 	<div class="container">
+		      <p class="navbar-text pull-left">© 2015 - Site D4F
+		           <a href="/" target="_blank">Comunity</a>
+		      </p>
+		      <a href="/" class="navbar-btn btn-danger btn pull-right">
+		      <span class="glyphicon glyphicon-star"></span> GO UP</a>
 		    </div>
-	    {% endfor %}
-	</div>
-</div>
-{% block page_content%}<div id="page_content"></div>{% endblock %}
-{% block footer %}
-        <div id="footer">
-	        <div id="footer" style="margin-top:5px; background-color:#DFEFF0">
-			 	<div class="container">
-			      <p class="navbar-text pull-left">© 2015 - Site D4F
-			           <a href="/" target="_blank">Comunity</a>
-			      </p>
-			      <a href="/" class="navbar-btn btn-danger btn pull-right">
-			      <span class="glyphicon glyphicon-star"></span> GO UP</a>
-			    </div>
-			</div>
 		</div>
+        {% endblock %}
+    </div>
 {% endblock %}
 </div>
-{% endblock %}
 {% block scripts %}
 {{ super() }}
 {{ moment.include_moment() }}

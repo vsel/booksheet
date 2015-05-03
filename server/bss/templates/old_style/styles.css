@@ -1,0 +1,44 @@
+body { padding-top: 60px; 
+}
+.carousel .item img {
+    padding-top: 10px;
+    min-width: 100%;
+    height: auto;
+    max-height: 900px;
+}
+#firstparallax { 
+    background: url(http://upload.wikimedia.org/wikipedia/commons/d/d3/Tajik_mountains_edit.jpg) 50% 0 fixed; 
+    height: auto;  
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    width: 100%; 
+    position: relative; 
+    padding: 100px 0;
+}
+#aboutapp { 
+    background: url(https://farm9.staticflickr.com/8225/8469133401_26393ef507_o.jpg) 50% 0 fixed; 
+    height: auto;  
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    width: 100%; 
+    position: relative; 
+    padding: 100px 0;
+}
+
+.vert {
+  vertical-align: middle;
+  width:100%;
+  padding-top:4%;
+  text-align:center;
+}
+
+.header h1 {
+  font-size:80px;
+  -webkit-text-stroke: 1px rgba(f,f,f,0.1);
+  color:#3B0496;
+  color:#3B0496;
+  margin-left:-5px;
+  margin-bottom:5px;
+  text-transform:uppercase;
+}
+
