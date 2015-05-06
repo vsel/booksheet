@@ -4,15 +4,15 @@ from bss import create_app, db
 from flask.ext.script import Manager, Shell, Server
 from flask.ext.migrate import Migrate, MigrateCommand
 
-app = create_app(os.getenv('FLASK_CONFIG') or 'default')
-manager = Manager(app)
-migrate = Migrate(app, db)
+bss = create_app(os.getenv('FLASK_CONFIG') or 'default')
+manager = Manager(bss)
+migrate = Migrate(bss, db)
 
 manager.add_command("runserver", Server(host="0.0.0.0", port=8080))
 
 
 def make_shell_context():
-    return dict(app=app, db=db)
+    return dict(bss=bss, db=db)
     
 manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)

@@ -6,19 +6,16 @@ from datetime import datetime
 from . import main
 from ..dao import User, Bookmark, Anonymous
 from .forms import BookmarkForm
-from .. import db
+from ..model import insert_to_db,get_all_bookmarks_with_user,remove_from_db
 
 @main.route('/')
 def index_html():
-    #print User.query.all()
     return render_template('index.html')
 
 @main.route('/bookmarks/<username>')
 @login_required 
 def show_bookmarks(username):
-    #print User.query.all()
-    user = User.query.filter_by(username=username).first_or_404()
-    bookmarks = Bookmark.query.filter_by(userid=user.id).order_by('timestamp desc').all()
+    (bookmarks, user) = get_all_bookmarks_with_user(username)
     return render_template('bookmark_view.html',name = user.username,bookmarks = bookmarks, current_user = current_user)
 
 @main.route('/edit/<int:id>', methods=['GET', 'POST'])
@@ -30,10 +27,10 @@ def edit_bookmark(id):
     form = BookmarkForm()
     if form.validate_on_submit():
         bookmark.text = form.body.data
-        db.session.add(bookmark)
+        insert_to_db(bookmark)
         flash('The post has been updated.')
         #return redirect(url_for('.post', id=post.id))
-        return redirect(url_for('main.index_html'))
+        return redirect(url_for('main.show_bookmarks',username = current_user.username))
     form.body.data = bookmark.text
     return render_template('bookmark_edit.html', form=form)
 
@@ -43,8 +40,7 @@ def bookmark_delete(id):
     bookmark = Bookmark.query.get_or_404(id)
     if current_user.id != bookmark.userid :
         abort(403)
-    db.session.delete(bookmark)
-    db.session.commit()
+    remove_from_db(bookmark)
     return redirect(url_for('main.show_bookmarks',username = current_user.username))
 
 

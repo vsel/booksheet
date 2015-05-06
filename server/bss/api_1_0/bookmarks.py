@@ -1,15 +1,15 @@
 from flask import jsonify, request, g, abort, url_for, current_app
-from .. import db
 from . import api
 from ..dao import Bookmark
 from flask.ext.login import login_required
+from ..model import insert_to_db
 
 @api.route('/bookmarks/add', methods=['POST'])
 def add_new_bookmark_with_json():
     #print request.json
     bookmark = Bookmark.from_json(request.json)
-    db.session.add(bookmark)
-    db.session.commit()
+    if g.current_user.id == bookmark["userid"]:
+        insert_to_db(bookmark)
     return jsonify(bookmark.to_json()) 
 
 @api.route('/bookmarks/get_all', methods=['GET'])

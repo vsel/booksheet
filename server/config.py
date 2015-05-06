@@ -58,10 +58,21 @@ config = {
 }
 
 """For further options
+TODO: ADD OpenID or Flask-OAuth or both
 OPENID_PROVIDERS = [
     {'name': 'Google', 'url': 'https://www.google.com/accounts/o8/id'},
     {'name': 'Yahoo', 'url': 'https://me.yahoo.com'},
     {'name': 'AOL', 'url': 'http://openid.aol.com/<username>'},
     {'name': 'Flickr', 'url': 'http://www.flickr.com/<username>'},
     {'name': 'MyOpenID', 'url': 'https://www.myopenid.com'}]
+
+facebook = oauth.remote_app('facebook',
+    base_url='https://graph.facebook.com/',
+    request_token_url=None,
+    access_token_url='/oauth/access_token',
+    authorize_url='https://www.facebook.com/dialog/oauth',
+    consumer_key=FACEBOOK_APP_ID,
+    consumer_secret=FACEBOOK_APP_SECRET,
+    request_token_params={'scope': 'email'}
+)
 """
