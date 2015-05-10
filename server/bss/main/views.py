@@ -4,9 +4,9 @@ from flask.ext.login import login_required, login_user, logout_user,\
 current_user
 from datetime import datetime
 from . import main
-from ..dao import User, Bookmark, Anonymous
 from .forms import BookmarkForm
-from ..model import insert_to_db,get_all_bookmarks_with_user,remove_from_db
+from ..model import insert_to_db,get_all_bookmarks_with_user,remove_from_db, \
+get_bookmark
 
 @main.route('/')
 def index_html():
@@ -21,7 +21,7 @@ def show_bookmarks(username):
 @main.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_bookmark(id):
-    bookmark = Bookmark.query.get_or_404(id)
+    bookmark = get_bookmark(id)
     if current_user.id != bookmark.userid :
         abort(403)
     form = BookmarkForm()
@@ -37,7 +37,7 @@ def edit_bookmark(id):
 @main.route('/delete/<int:id>', methods=['GET'])
 @login_required
 def bookmark_delete(id):
-    bookmark = Bookmark.query.get_or_404(id)
+    bookmark = get_bookmark(id)
     if current_user.id != bookmark.userid :
         abort(403)
     remove_from_db(bookmark)
