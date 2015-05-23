@@ -10,6 +10,7 @@ get_bookmark
 
 @main.route('/')
 def index_html():
+    #current_app.logger.error('An error occurred')
     return render_template('index.html')
 
 @main.route('/bookmarks/<username>')

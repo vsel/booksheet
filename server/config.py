@@ -36,10 +36,10 @@ class ProductionConfig(Config):
         Config.init_app(app)
 
 
-class UnixConfig(ProductionConfig):
+class UnixConfig(DevelopmentConfig):
     @classmethod
     def init_app(cls, app):
-        ProductionConfig.init_app(app)
+        DevelopmentConfig.init_app(app)
 
         # log to syslog
         import logging
@@ -54,7 +54,7 @@ config = {
     'production': ProductionConfig,
     'unix': UnixConfig,
 
-    'default': DevelopmentConfig
+    'default': UnixConfig
 }
 
 """For further options

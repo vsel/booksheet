@@ -1,4 +1,4 @@
-from flask import g, jsonify,request
+from flask import g, jsonify,request, current_app
 from flask.ext.httpauth import HTTPBasicAuth
 from ..dao import User, Anonymous
 from . import api
@@ -8,10 +8,9 @@ authenticate = HTTPBasicAuth()
 
 @authenticate.verify_password
 def verify_password(email_or_token, password):
-    print request.headers
+    #current_app.logger.error('An error occurred')
     if email_or_token == '':
         g.current_user = Anonymous()
-        print "Test Anon"
         return True
     if password == '':
         g.current_user = User.verify_auth_token(email_or_token)
